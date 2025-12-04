@@ -1,0 +1,10 @@
+section.card
+  h2.card__title = order.new_record? ? 'New order' : "Edit order ##{order.id}"
+
+  = simple_form_for order do |f|
+    .form-grid
+      = f.input :amount, label: 'Amount', input_html: { autofocus: true }
+
+    .form-actions
+      = f.button :submit, class: 'btn btn-primary'
+      = link_to 'Cancel', orders_path, class: 'btn btn-link'

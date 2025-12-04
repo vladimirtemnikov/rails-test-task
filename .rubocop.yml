@@ -1,0 +1,102 @@
+plugins:
+  - rubocop-factory_bot
+  - rubocop-performance
+  - rubocop-rails
+  - rubocop-rspec
+  - rubocop-rspec_rails
+
+AllCops:
+  NewCops: enable
+  TargetRailsVersion: 8.1
+  TargetRubyVersion: 3.4
+  Exclude:
+    - "bin/**/*"
+    - "db/seeds/"
+    - "db/views/"
+    - "db/seeds.rb"
+    - "db/schema.rb"
+    - "db/queue_schema.rb"
+    - "vendor/**/*"
+
+Layout/LineLength:
+  Max: 120
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented_relative_to_receiver
+
+Lint/MissingSuper:
+  Exclude:
+    - "spec/**/*"
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  AllowedMethods:
+    - class_methods
+    - configure
+    - create_table
+    - included
+    - namespace
+    - setup
+    - state_machine
+    - task
+    - with_options
+  Exclude:
+    - "config/routes.rb"
+    - "db/seeds/**/*"
+    - "spec/**/*"
+    - "Gemfile"
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/HashSyntax:
+  EnforcedShorthandSyntax: always
+
+Style/MissingRespondToMissing:
+  Exclude:
+    - "spec/**/*"
+
+### RAILS SUPPORT ###
+
+Rails/BulkChangeTable:
+  Database: postgresql
+
+Rails/SkipsModelValidations:
+  Exclude:
+    - "spec/**/*"
+
+### RSPEC SUPPORT ###
+
+RSpec/ContextWording:
+  Prefixes:
+    - and
+    - if
+    - when
+    - with
+    - without
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/IndexedLet:
+  Max: 2
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/NestedGroups:
+  Enabled: false

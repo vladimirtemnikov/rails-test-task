@@ -1,0 +1,38 @@
+main.page
+  .page-header
+    h1.page-title Sign up
+
+  section.card
+    h2.card__title Create your account
+
+    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+      = render "devise/shared/error_messages", resource: resource
+
+      .form-grid
+        .field
+          = f.label :email
+          br
+          = f.email_field :email, autofocus: true, autocomplete: "email"
+
+        .field
+          = f.label :password
+          - if @minimum_password_length
+            em
+              | (
+              = @minimum_password_length
+              |  characters minimum)
+            br
+          = f.password_field :password, autocomplete: "new-password"
+
+        .field
+          = f.label :password_confirmation
+          br
+          = f.password_field :password_confirmation, autocomplete: "new-password"
+
+      .form-actions
+        = f.submit "Sign up", class: 'btn btn-primary'
+
+  section.card
+    h2.card__title Already have an account?
+    .form-grid
+      = render "devise/shared/links"

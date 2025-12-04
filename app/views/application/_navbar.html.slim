@@ -1,0 +1,4 @@
+nav.app-sidebar
+  ul.app-sidebar__nav
+    li = link_to 'Orders', orders_path, class: ['app-sidebar__link', (current_page?(orders_path) || current_page?(root_path) ? 'is-active' : nil)].compact.join(' ')
+    li = link_to 'Wallet transactions', wallet_transactions_path, class: ['app-sidebar__link', (current_page?(wallet_transactions_path) ? 'is-active' : nil)].compact.join(' ')

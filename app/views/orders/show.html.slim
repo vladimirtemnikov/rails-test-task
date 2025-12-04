@@ -1,0 +1,48 @@
+main.page
+  .page-header
+    h1.page-title Order ##{order.id}
+    = link_to 'Back to orders', orders_path, class: 'btn btn-link'
+
+  .grid
+    .card
+      h2.card__title Order details
+      dl.definition-list
+        .definition-list__row
+          dt ID
+          dd = order.id
+        .definition-list__row
+          dt Amount
+          dd = number_to_currency(order.amount)
+        .definition-list__row
+          dt Status
+          dd
+            span.badge class="badge--#{order.status}"
+              = order.status.titleize
+        .definition-list__row
+          dt Created at
+          dd = l(order.created_at, format: :long)
+        - if order.updated_at && order.updated_at != order.created_at
+          .definition-list__row
+            dt Updated at
+            dd = l(order.updated_at, format: :long)
+
+    .card
+      h2.card__title Actions
+
+      .btn-group
+        - if allowed_to?(:complete?, order)
+          = button_to 'Complete order',
+            complete_order_path(order),
+            method: :post,
+            class: 'btn btn-success',
+            data: { turbo_confirm: 'Are you sure you want to complete this order?' }
+
+        - if allowed_to?(:cancel?, order)
+          = button_to 'Cancel order',
+            cancel_order_path(order),
+            method: :post,
+            class: 'btn btn-danger',
+            data: { turbo_confirm: 'Are you sure you want to cancel this order?' }
+
+        - unless allowed_to?(:complete?, order) || allowed_to?(:cancel?, order)
+          p.text-muted No actions available for this order in its current status.

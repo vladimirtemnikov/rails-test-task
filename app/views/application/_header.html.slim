@@ -1,0 +1,16 @@
+header.app-header
+  .app-header__inner
+    = link_to 'Test Rails', root_path, class: 'app-header__brand'
+
+    - if user_signed_in?
+      .app-header__actions
+        span.app-header__user
+          = current_user.email
+          span.app-header__wallet
+            | · Balance:
+            = number_to_currency(current_user.wallet.balance)
+        = button_to 'Sign out',
+          destroy_user_session_path,
+          method: :delete,
+          class: 'btn btn-link',
+          form: { class: 'inline-form' }

@@ -1,0 +1,31 @@
+main.page
+  .page-header
+    h1.page-title Orders
+    = link_to 'New order', new_order_path, class: 'btn btn-primary'
+
+  - if orders.present?
+    .card
+      table.table
+        thead
+          tr
+            th ID
+            th Amount
+            th Status
+            th Created at
+            th Actions
+        tbody
+          - orders.each do |order|
+            tr
+              td = order.id
+              td = number_to_currency(order.amount)
+              td
+                span.badge class="badge--#{order.status}"
+                  = order.status.titleize
+              td = l(order.created_at, format: :short)
+              td
+                = link_to 'View', order_path(order), class: 'btn btn-link'
+  - else
+    .empty-state
+      p.empty-state__title You have no orders yet.
+      p.empty-state__description Create your first order to see it here.
+      = link_to 'Create your first order', new_order_path, class: 'btn btn-primary'

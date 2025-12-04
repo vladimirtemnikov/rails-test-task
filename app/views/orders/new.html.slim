@@ -1,0 +1,6 @@
+main.page
+  .page-header
+    h1.page-title New order
+    = link_to 'Back to orders', orders_path, class: 'btn btn-link'
+
+  = render partial: 'form', locals: { order: }
